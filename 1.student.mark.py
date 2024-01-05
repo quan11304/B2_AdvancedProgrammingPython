@@ -7,7 +7,7 @@ marks = {}  # Key is list of course and student, value is mark.
 
 def input_no_students():
     global no_students, students
-    print("*************************")
+    print("\n*************************")
     print("1. Input number of students")
     while True:
         no_students = int(input("Enter the number of students: "))
@@ -20,24 +20,24 @@ def input_no_students():
 
 def input_student_info():
     global no_students, students
-    print("*************************")
+    print("\n*************************")
     print("2. Input student information")
     while True:
+        if len(students) >= no_students:
+            print("Max number of students reached. Exiting...")
+            break
         ID = input("Enter Student ID: ")
         name = input("Enter Student Name: ")
         dob = input("Enter Student Date of Birth: ")
         students[ID] = (name, dob)
         print("Student added to record successfully!")
-        if len(students) < no_students:
-            print("Max number of students reached. Exiting...")
-            break
-        elif not (bool(input("Do you want to continue? (1/0)"))):
+        if not (bool(input("Do you want to continue? (1/0): "))):
             break
 
 
 def input_no_courses():
     global no_courses, courses
-    print("*************************")
+    print("\n*************************")
     print("3. Input number of courses")
     while True:
         print("There are currently " + no_courses + " courses available.")
@@ -51,76 +51,79 @@ def input_no_courses():
 
 def input_course_info():
     global no_courses, courses
-    print("*************************")
+    print("\n*************************")
     print("4. Input course information")
     while True:
+        if len(courses) >= no_courses:
+            print("Max number of courses reached. Exiting...")
+            break
         ID = input("Enter Course ID: ")
         name = input("Enter Course Name: ")
         courses[ID] = name
         print("Course created successfully!")
-        if len(courses) < no_courses:
-            print("Max number of courses reached. Exiting...")
-            break
-        elif not (bool(input("Do you want to continue? (1/0)"))):
+        if not (bool(input("Do you want to continue? (1/0): "))):
             break
 
 
 def input_marks():
-    print("*************************")
+    print("\n*************************")
     print("5. Input student marks")
 
 
 def display_courses():
-    print("*************************")
+    print("\n*************************")
     print("6. Display all courses")
+    for c in courses:
+        print(f"{c} - {courses[c]}")
 
 
 def display_students():
-    print("*************************")
+    print("\n*************************")
     print("7. Display all students")
+    for s in students:
+        print(f"{s} - {(students[s])[0]} - {(students[s])[1]}")
 
 
 def display_marks():
-    print("*************************")
+    print("\n*************************")
     print("8. Display marks of chosen student")
 
 
 while (True):
     print("""
-    *************************
-    1. Input number of students
-    2. Input student information
-    3. Input number of courses
-    4. Input course information
-    5. Input student marks
-    6. Display all courses
-    7. Display all students
-    8. Display marks of chosen student
-    0. Exit
-    *************************
-    """)
+*************************
+1. Input number of students
+2. Input student information
+3. Input number of courses
+4. Input course information
+5. Input student marks
+6. Display all courses
+7. Display all students
+8. Display marks of chosen student
+0. Exit
+*************************""")
 
     choice = input("Choose the next action by entering the respective "
                    "number: ")
 
     match choice:
-        case 1:
-            continue
-        case 2:
-            continue
-        case 3:
-            continue
-        case 4:
-            continue
-        case 5:
-            continue
-        case 6:
-            continue
-        case 7:
-            continue
-        case 8:
-            continue
-        case 0:
+        case "1":
+            input_no_students()
+        case "2":
+            input_student_info()
+        case "3":
+            input_no_courses()
+        case "4":
+            input_course_info()
+        case "5":
+            input_marks()
+        case "6":
+            display_courses()
+        case "7":
+            display_students()
+        case "8":
+            display_marks()
+        case "0":
             break
         case _:
             print("Invalid")
