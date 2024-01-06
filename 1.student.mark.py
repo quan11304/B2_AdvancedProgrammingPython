@@ -33,7 +33,8 @@ def input_student_info():
         dob = input("Enter Student Date of Birth: ")
         students[ID] = (name, dob)
         print("Student added to record successfully!")
-        if not (bool(input("Do you want to continue? (1/0): "))):
+        if not (int(input("Do you want to continue? (1/0): "))):
+            # 1 to continue, 0 to quit
             break
 
 
@@ -63,7 +64,7 @@ def input_course_info():
         name = input("Enter Course Name: ")
         courses[ID] = name
         print("Course created successfully!")
-        if not (bool(input("Do you want to continue? (1/0): "))):
+        if not (int(input("Do you want to continue? (1/0): "))):
             break
 
 
