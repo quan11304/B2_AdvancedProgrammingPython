@@ -6,7 +6,7 @@ marks = {}  # Key is list of course and student, value is mark.
 
 
 def input_no_students():
-    global no_students, students
+    global no_students
     print("\n*************************")
     print("1. Input number of students")
     while True:
@@ -21,7 +21,6 @@ def input_no_students():
 
 
 def input_student_info():
-    global no_students, students
     print("\n*************************")
     print("2. Input student information")
     while True:
@@ -42,7 +41,7 @@ def input_student_info():
 
 
 def input_no_courses():
-    global no_courses, courses
+    global no_courses
     print("\n*************************")
     print("3. Input number of courses")
     while True:
@@ -56,7 +55,6 @@ def input_no_courses():
 
 
 def input_course_info():
-    global no_courses, courses
     print("\n*************************")
     print("4. Input course information")
     while True:
@@ -125,7 +123,7 @@ def display_marks():
             print(f"{mark[0]} - {mark[1]} - {marks[mark]}")
 
 
-while (True):
+while True:
     print("""
 *************************
 1. Input number of students
