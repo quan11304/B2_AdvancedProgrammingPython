@@ -29,6 +29,9 @@ def input_student_info():
             print("Max number of students reached. Exiting...")
             break
         ID = input("Enter Student ID: ")
+        if ID in students.keys():
+            print("ID already exists. Please try again.")
+            continue
         name = input("Enter Student Name: ")
         dob = input("Enter Student Date of Birth: ")
         students[ID] = (name, dob)
@@ -61,6 +64,9 @@ def input_course_info():
             print("Max number of courses reached. Exiting...")
             break
         ID = input("Enter Course ID: ")
+        if ID in courses.keys():
+            print("ID already exists. Please try again")
+            continue
         name = input("Enter Course Name: ")
         courses[ID] = name
         print("Course created successfully!")
@@ -85,6 +91,10 @@ def input_marks():
             break
     mark = int(input("Enter Mark: "))
     marks[(course, student)] = mark
+    if (course, student) in marks.keys():
+        print("Mark updated successfully")
+    else:
+        print("Mark registered successfully")
 
 
 def display_courses():
