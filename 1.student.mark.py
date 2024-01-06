@@ -10,6 +10,8 @@ def input_no_students():
     print("\n*************************")
     print("1. Input number of students")
     while True:
+        print("There are currently " + str(no_students) + " registered "
+                                                          "students.")
         no_students = int(input("Enter the number of students: "))
         if no_students < len(students):
             print("Invalid. This value must be equal or greater than the "
@@ -40,7 +42,7 @@ def input_no_courses():
     print("\n*************************")
     print("3. Input number of courses")
     while True:
-        print("There are currently " + no_courses + " courses available.")
+        print("There are currently " + str(no_courses) + " courses available.")
         no_courses = int(input("Enter the number of courses: "))
         if no_courses < len(courses):
             print("Invalid. This value must be equal or greater than the "
@@ -68,6 +70,20 @@ def input_course_info():
 def input_marks():
     print("\n*************************")
     print("5. Input student marks")
+    while True:
+        course = input("Enter Course ID: ")
+        if course not in courses.keys():
+            print("Course not found. Please try again.")
+        else:
+            break
+    while True:
+        student = input("Enter Student ID: ")
+        if student not in students.keys():
+            print("Student not found. Please try again.")
+        else:
+            break
+    mark = int(input("Enter Mark: "))
+    marks[(course, student)] = mark
 
 
 def display_courses():
@@ -87,6 +103,15 @@ def display_students():
 def display_marks():
     print("\n*************************")
     print("8. Display marks of chosen student")
+    while True:
+        student = input("Enter Student ID: ")
+        if student not in students:
+            print("Student not found. Please try again.")
+        else:
+            break
+    for mark in marks:
+        if mark[1] == student:
+            print(f"{mark[0]} - {mark[1]} - {marks[mark]}")
 
 
 while (True):
