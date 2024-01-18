@@ -6,16 +6,22 @@ marks = []
 
 
 class Course:
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, id_, name):
+        self.id = id_
         self.name = name
+
+    def __str__(self):
+        return f'{self.id} - {self.name}'
 
 
 class Student:
-    def __init__(self, id, name, dob):
-        self.id = id
+    def __init__(self, id_, name, dob):
+        self.id = id_
         self.name = name
         self.dob = dob
+
+    def __str__(self):
+        return f'{self.id} - {self.name} - {self.dob}'
 
 
 class Marks:
@@ -23,6 +29,9 @@ class Marks:
         self.course = course
         self.student = student
         self.mark = mark
+
+    def __str__(self):
+        return f'{self.course} - {self.student} - {self.mark}\n'
 
 
 def input_no_students():
@@ -119,30 +128,31 @@ def display_courses():
     print("\n*************************")
     print("6. Display all courses")
     for c in courses:
-        print(f"{c} - {courses[c]}")
+        c.__str__()
 
 
 def display_students():
     print("\n*************************")
     print("7. Display all students")
     for s in students:
-        print(f"{s} - {(students[s])[0]} - {(students[s])[1]}")
+        s.__str__()
 
 
 def display_marks():
     print("\n*************************")
     print("8. Display marks of chosen student")
     while True:
-        student = input("Enter Student ID: ")
-        if student not in students:
+        s = input("Enter Student ID: ")
+        if s not in students:
             print("Student not found. Please try again.")
         else:
             break
     for mark in marks:
-        if mark[1] == student:
-            print(f"{mark[0]} - {mark[1]} - {marks[mark]}")
+        if mark[1] == s:
+            mark.__str__()
 
 
+# Main programme
 while True:
     print("""
 *************************
