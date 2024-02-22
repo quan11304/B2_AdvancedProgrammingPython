@@ -120,16 +120,25 @@ def input_student_info():
         if len(students) >= no_students:
             print("Max number of students reached. Exiting...")
             break
-        ID = input("Enter Student ID: ")
-        if ID in students.keys():
-            print("ID already exists. Please try again.")
+
+        id_ = input("Enter Student ID: ")
+        # Check for duplicates
+        br = 0
+        for s in students:
+            if id_ == s.id():
+                br = 1
+                print("ID already exists. Please try again.")
+                break
+        if br == 1:
             continue
+
         name = input("Enter Student Name: ")
         dob = input("Enter Student Date of Birth: ")
-        students[ID] = (name, dob)
+        s = Student(id_, name, dob)
+        students.add(s)
         print("Student added to record successfully!")
         if not (int(input("Do you want to continue? (1/0): "))):
-            # 1 to continue, 0 to quit
+            # 1 (or any other number) to continue, 0 to quit
             break
 
 
@@ -154,66 +163,94 @@ def input_course_info():
         if len(courses) >= no_courses:
             print("Max number of courses reached. Exiting...")
             break
-        ID = input("Enter Course ID: ")
-        if ID in courses.keys():
-            print("ID already exists. Please try again")
+
+        id_ = input("Enter Course ID: ")
+        # Check for duplicates
+        br = 0
+        for c in courses:
+            if id_ == c.id():
+                br = 1
+                print("ID already exists. Please try again.")
+                break
+        if br == 1:
             continue
+
         name = input("Enter Course Name: ")
-        courses[ID] = name
+        courses.add(Course(id_, name))
         print("Course created successfully!")
         if not (int(input("Do you want to continue? (1/0): "))):
+            # 1 (or any other number) to continue, 0 to quit
             break
 
 
 def input_marks():
     print("\n*************************")
     print("5. Input student marks")
+
+    br = 0
     while True:
         course = input("Enter Course ID: ")
-        if course not in courses.keys():
+        for c in courses:
+            if c.id == course:
+                br = 1
+                break
+        if br == 0:
             print("Course not found. Please try again.")
         else:
             break
+
+    br = 0
     while True:
         student = input("Enter Student ID: ")
-        if student not in students.keys():
-            print("Student not found. Please try again.")
+        for s in students:
+            if s.id == student:
+                br = 1
+                break
+        if br == 0:
+            print("Course not found. Please try again.")
         else:
             break
+
     mark = int(input("Enter Mark: "))
-    marks[(course, student)] = mark
-    if (course, student) in marks.keys():
-        print("Mark updated successfully")
-    else:
-        print("Mark registered successfully")
+    marks.add(Marks(course,student,mark))
+    # if (course, student) in marks.keys():
+    #     print("Mark updated successfully")
+    # else:
+    #     print("Mark registered successfully")
 
 
 def display_courses():
     print("\n*************************")
     print("6. Display all courses")
     for c in courses:
-        c.__str__()
+        print(c.__str__())
 
 
 def display_students():
     print("\n*************************")
     print("7. Display all students")
     for s in students:
-        s.__str__()
+        print(s.__str__())
 
 
 def display_marks():
     print("\n*************************")
     print("8. Display marks of chosen student")
+
+    br = 0
     while True:
-        s = input("Enter Student ID: ")
-        if s not in students:
+        student = input("Enter Student ID: ")
+        for s in students:
+            if s.id() == student:
+                br = 1
+                break
+        if br == 0:
             print("Student not found. Please try again.")
         else:
             break
     for mark in marks:
-        if mark[1] == s:
-            mark.__str__()
+        if mark.student() == student:
+            print(mark.__str__())
 
 
 # Main programme
