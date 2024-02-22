@@ -1,37 +1,101 @@
 no_courses = 0
 no_students = 0
-courses = []
-students = []
-marks = []
+courses = set()
+students = set()
+marks = set()
 
 
 class Course:
     def __init__(self, id_, name):
-        self.id = id_
-        self.name = name
+        self.__id = id_
+        self.__name = name
+
+    @property
+    def id(self):
+        return self.__id
+
+    @id.setter
+    def id(self, id):
+        self.__id = id
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name
 
     def __str__(self):
-        return f'{self.id} - {self.name}'
+        return f'{self.__id} - {self.__name}'
 
 
 class Student:
     def __init__(self, id_, name, dob):
-        self.id = id_
-        self.name = name
-        self.dob = dob
+        self.__id = id_
+        self.__name = name
+        self.__dob = dob
+
+    @property
+    def id(self):
+        return self.__id
+
+    @id.setter
+    def id(self, id):
+        self.__id = id
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name
+
+    @property
+    def dob(self):
+        return self.__dob
+
+    @dob.setter
+    def dob(self, dob):
+        self.__dob = dob
 
     def __str__(self):
-        return f'{self.id} - {self.name} - {self.dob}'
+        return f'{self.__id} - {self.__name} - {self.__dob}'
 
 
 class Marks:
     def __init__(self, course, student, mark):
-        self.course = course
-        self.student = student
-        self.mark = mark
+        self.__course = course
+        self.__student = student
+        self.__mark = mark
+
+    @property
+    def course(self):
+        return self.__course
+
+    @course.setter
+    def course(self, course):
+        self.__course = course
+
+    @property
+    def student(self):
+        return self.__student
+
+    @student.setter
+    def student(self, student):
+        self.__student = student
+
+    @property
+    def mark(self):
+        return self.__mark
+
+    @mark.setter
+    def mark(self, mark):
+        self.__mark = mark
 
     def __str__(self):
-        return f'{self.course} - {self.student} - {self.mark}\n'
+        return f'{self.__course} - {self.__student} - {self.__mark}\n'
 
 
 def input_no_students():
