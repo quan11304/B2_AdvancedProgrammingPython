@@ -10,20 +10,16 @@ class Course:
         self.__id = id_
         self.__name = name
 
-    @property
-    def id(self):
+    def get_id(self):
         return self.__id
 
-    @id.setter
-    def id(self, id):
-        self.__id = id
+    def set_id(self, id_):
+        self.__id = id_
 
-    @property
-    def name(self):
+    def get_name(self):
         return self.__name
 
-    @name.setter
-    def name(self, name):
+    def set_name(self,name):
         self.__name = name
 
     def __str__(self):
@@ -36,28 +32,22 @@ class Student:
         self.__name = name
         self.__dob = dob
 
-    @property
-    def id(self):
+    def get_id(self):
         return self.__id
 
-    @id.setter
-    def id(self, id):
-        self.__id = id
+    def set_id(self, id_):
+        self.__id = id_
 
-    @property
-    def name(self):
+    def get_name(self):
         return self.__name
 
-    @name.setter
-    def name(self, name):
+    def set_name(self,name):
         self.__name = name
 
-    @property
-    def dob(self):
+    def get_dob(self):
         return self.__dob
 
-    @dob.setter
-    def dob(self, dob):
+    def set_dob(self,dob):
         self.__dob = dob
 
     def __str__(self):
@@ -70,28 +60,22 @@ class Marks:
         self.__student = student
         self.__mark = mark
 
-    @property
-    def course(self):
+    def get_course(self):
         return self.__course
 
-    @course.setter
-    def course(self, course):
+    def set_course(self,course):
         self.__course = course
 
-    @property
-    def student(self):
+    def get_student(self):
         return self.__student
 
-    @student.setter
-    def student(self, student):
+    def set_student(self,student):
         self.__student = student
 
-    @property
-    def mark(self):
+    def get_mark(self):
         return self.__mark
 
-    @mark.setter
-    def mark(self, mark):
+    def set_mark(self,mark):
         self.__mark = mark
 
     def __str__(self):
@@ -125,7 +109,7 @@ def input_student_info():
         # Check for duplicates
         br = 0
         for s in students:
-            if id_ == s.id():
+            if id_ == s.get_id():
                 br = 1
                 print("ID already exists. Please try again.")
                 break
@@ -168,7 +152,7 @@ def input_course_info():
         # Check for duplicates
         br = 0
         for c in courses:
-            if id_ == c.id():
+            if id_ == c.get_id():
                 br = 1
                 print("ID already exists. Please try again.")
                 break
@@ -191,7 +175,7 @@ def input_marks():
     while True:
         course = input("Enter Course ID: ")
         for c in courses:
-            if c.id == course:
+            if c.get_id() == course:
                 br = 1
                 break
         if br == 0:
@@ -203,7 +187,7 @@ def input_marks():
     while True:
         student = input("Enter Student ID: ")
         for s in students:
-            if s.id == student:
+            if s.get_id() == student:
                 br = 1
                 break
         if br == 0:
@@ -241,7 +225,7 @@ def display_marks():
     while True:
         student = input("Enter Student ID: ")
         for s in students:
-            if s.id() == student:
+            if s.get_id() == student:
                 br = 1
                 break
         if br == 0:
@@ -249,7 +233,7 @@ def display_marks():
         else:
             break
     for mark in marks:
-        if mark.student() == student:
+        if mark.get_student() == student:
             print(mark.__str__())
 
 
