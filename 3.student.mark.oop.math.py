@@ -1,5 +1,5 @@
 import math
-import numpy
+import numpy as np
 
 no_courses = 0
 no_students = 0
@@ -82,7 +82,7 @@ class Marks:
         self.__mark = mark
 
     def __str__(self):
-        return f'{self.__course} - {self.__student} - {self.__mark}\n'
+        return f'{self.__course} - {self.__student} - {self.__mark}'
 
 
 def input_no_students():
@@ -194,11 +194,11 @@ def input_marks():
                 br = 1
                 break
         if br == 0:
-            print("Course not found. Please try again.")
+            print("Student not found. Please try again.")
         else:
             break
 
-    mark = math.floor(float(input("Enter Mark: "))*10)/10
+    mark = math.floor(float(input("Enter Mark: ")) * 10) / 10
     marks.add(Marks(course, student, mark))
     # if (course, student) in marks.keys():
     #     print("Mark updated successfully")
@@ -235,9 +235,27 @@ def display_marks():
             print("Student not found. Please try again.")
         else:
             break
+
+    found = []
     for mark in marks:
         if mark.get_student() == student:
             print(mark.__str__())
+            found.append(mark.get_mark())
+    print(np.average(np.array(found)))
+
+
+def sort_gpa():
+    list = []
+    for student in students:
+        gpa = count = 0
+        for mark in marks:
+            if mark.get_student() == student.get_id():
+                gpa += mark.get_mark()
+                count += 1
+        gpa /= count
+        list.append((student.get_id(), student.get_name, gpa))
+    array = np.array(list,dtype=[('ID','U15'),('name','U30'),('gpa','d')])
+    
 
 
 # Main programme
@@ -252,6 +270,7 @@ while True:
 6. Display all courses
 7. Display all students
 8. Display marks of chosen student
+9. Sort student list by GPA
 0. Exit
 *************************""")
 
@@ -275,6 +294,8 @@ while True:
             display_students()
         case "8":
             display_marks()
+        case "9":
+            sort_gpa()
         case "0":
             break
         case _:
