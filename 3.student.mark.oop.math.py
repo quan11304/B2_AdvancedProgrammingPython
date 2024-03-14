@@ -255,7 +255,7 @@ def sort_gpa():
         gpa /= count
         list.append((student.get_id(), student.get_name, gpa))
     array = np.array(list,dtype=[('ID','U15'),('name','U30'),('gpa','d')])
-    
+    print(np.argsort(array['gpa']))
 
 
 # Main programme
