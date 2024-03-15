@@ -174,36 +174,42 @@ def input_marks():
     print("\n*************************")
     print("5. Input student marks")
 
-    br = 0
     while True:
-        course = input("Enter Course ID: ")
-        for c in courses:
-            if c.get_id() == course:
-                br = 1
+        br = 0
+        while True:
+            course = input("Enter Course ID: ")
+            for c in courses:
+                if c.get_id() == course:
+                    br = 1
+                    break
+            if br == 0:
+                print("Course not found. Please try again.")
+            else:
                 break
-        if br == 0:
-            print("Course not found. Please try again.")
-        else:
-            break
 
-    br = 0
-    while True:
-        student = input("Enter Student ID: ")
-        for s in students:
-            if s.get_id() == student:
-                br = 1
+        br = 0
+        while True:
+            student = input("Enter Student ID: ")
+            for s in students:
+                if s.get_id() == student:
+                    br = 1
+                    break
+            if br == 0:
+                print("Student not found. Please try again.")
+            else:
                 break
-        if br == 0:
-            print("Student not found. Please try again.")
-        else:
-            break
 
-    mark = math.floor(float(input("Enter Mark: ")) * 10) / 10
-    marks.add(Marks(course, student, mark))
-    # if (course, student) in marks.keys():
-    #     print("Mark updated successfully")
-    # else:
-    #     print("Mark registered successfully")
+        mark = math.floor(float(input("Enter Mark: ")) * 10) / 10
+        marks.add(Marks(course, student, mark))
+        
+        # if (course, student) in marks.keys():
+        #     print("Mark updated successfully")
+        # else:
+        #     print("Mark registered successfully")
+        
+        if not (int(input("Do you want to continue? (1/0): "))):
+            # 1 (or any other number) to continue, 0 to quit
+            break
 
 
 def display_courses():
@@ -253,9 +259,11 @@ def sort_gpa():
                 gpa += mark.get_mark()
                 count += 1
         gpa /= count
-        list.append((student.get_id(), student.get_name, gpa))
+        list.append((student.get_id(), student.get_name(), gpa))
     array = np.array(list,dtype=[('ID','U15'),('name','U30'),('gpa','d')])
-    print(np.argsort(array['gpa']))
+    sort_by = np.argsort(array['gpa'])
+    print(np.take_along_axis(array,sort_by,0))
+
 
 
 # Main programme
