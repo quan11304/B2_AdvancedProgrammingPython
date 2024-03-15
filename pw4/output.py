@@ -1,20 +1,21 @@
 import numpy as np
-from domains.Course import courses
-from domains.Student import students
-from domains.Marks import marks
+import global_var
+from domains.course import Course
+from domains.student import Student
+from domains.marks import Marks
 
 
 def display_courses():
     print("\n*************************")
     print("6. Display all courses")
-    for c in courses:
+    for c in global_var.courses:
         print(c.__str__())
 
 
 def display_students():
     print("\n*************************")
     print("7. Display all students")
-    for s in students:
+    for s in global_var.students:
         print(s.__str__())
 
 
@@ -25,7 +26,7 @@ def display_marks():
     br = 0
     while True:
         student = input("Enter Student ID: ")
-        for s in students:
+        for s in global_var.students:
             if s.get_id() == student:
                 br = 1
                 break
@@ -35,7 +36,7 @@ def display_marks():
             break
 
     found = []
-    for mark in marks:
+    for mark in global_var.marks:
         if mark.get_student() == student:
             print(mark.__str__())
             found.append(mark.get_mark())
@@ -44,9 +45,9 @@ def display_marks():
 
 def sort_gpa():
     list = []
-    for student in students:
+    for student in global_var.students:
         gpa = count = 0
-        for mark in marks:
+        for mark in global_var.marks:
             if mark.get_student() == student.get_id():
                 gpa += mark.get_mark()
                 count += 1
@@ -56,3 +57,4 @@ def sort_gpa():
                      dtype=[('ID', 'U15'), ('name', 'U30'), ('gpa', 'd')])
     sort_by = np.argsort(array['gpa'])
     print(np.take_along_axis(array, sort_by, 0))
+

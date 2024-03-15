@@ -1,5 +1,3 @@
-marks = set()
-
 class Marks:
     def __init__(self, course, student, mark):
         self.__course = course
