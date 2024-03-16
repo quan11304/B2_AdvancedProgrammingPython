@@ -4,9 +4,11 @@ from domains.course import Course
 from domains.student import Student
 from domains.marks import Marks
 
+
 def input_student_info():
     print("\n*************************")
     print("2. Input student information")
+    f = open("students.txt", "a")
     while True:
         id_ = input("Enter Student ID: ")
         # Check for duplicates
@@ -21,16 +23,23 @@ def input_student_info():
 
         name = input("Enter Student Name: ")
         dob = input("Enter Student Date of Birth: ")
+
         s = Student(id_, name, dob)
         global_var.students.add(s)
+
+        f.write(s.__str__() + "\n")
+
         print("Student added to record successfully!")
         if not (int(input("Do you want to continue? (1/0): "))):
             # 1 (or any other number) to continue, 0 to quit
             break
+    f.close()
+
 
 def input_course_info():
     print("\n*************************")
     print("4. Input course information")
+    f = open("courses.txt", "a")
     while True:
         id_ = input("Enter Course ID: ")
         # Check for duplicates
@@ -44,16 +53,23 @@ def input_course_info():
             continue
 
         name = input("Enter Course Name: ")
-        global_var.courses.add(Course(id_, name))
+
+        c = Course(id_, name)
+        global_var.courses.add(c)
+
+        f.write(c.__str__() + "\n")
+
         print("Course created successfully!")
         if not (int(input("Do you want to continue? (1/0): "))):
             # 1 (or any other number) to continue, 0 to quit
             break
+    f.close()
 
 
 def input_marks():
     print("\n*************************")
     print("5. Input student marks")
+    f = open("marks.txt", "a")
 
     while True:
         br = 0
@@ -81,7 +97,11 @@ def input_marks():
                 break
 
         mark = math.floor(float(input("Enter Mark: ")) * 10) / 10
-        global_var.marks.add(Marks(course, student, mark))
+
+        m = Marks(course, student, mark)
+        global_var.marks.add(m)
+
+        f.write(m.__str__() + "\n")
 
         # if (course, student) in marks.keys():
         #     print("Mark updated successfully")
@@ -91,3 +111,5 @@ def input_marks():
         if not (int(input("Do you want to continue? (1/0): "))):
             # 1 (or any other number) to continue, 0 to quit
             break
+
+    f.close()
